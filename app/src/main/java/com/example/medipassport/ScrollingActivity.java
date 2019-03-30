@@ -6,18 +6,27 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.DatePicker;
+import android.app.DatePickerDialog;
+import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.app.DatePickerDialog;
+import java.util.Calendar;
 import android.content.Intent;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class ScrollingActivity extends AppCompatActivity {
     private Button imageButton;
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
+
 
     EditText nameInput, bloodTypeInput, drugAllergiesInput, otherAllergiesInput, currentMedicalConditionInput, currentMedicationInput;
 
-    String name, bloodType, drugAllergies, otherAllergies, currentMedicalCondition, currentMedication;
+    String name, bloodType, drugAllergies, otherAllergies, currentMedicalCondition, currentMedication, birthDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +40,39 @@ public class ScrollingActivity extends AppCompatActivity {
         otherAllergiesInput = (EditText) findViewById(R.id.your_food_allergies);
         currentMedicalConditionInput = (EditText) findViewById(R.id.your_medical_conditions);
         currentMedicationInput = (EditText) findViewById(R.id.your_medications);
+        String savedName = getIntent().getStringExtra("SAVED_NAME");
+        nameInput.setText(savedName) ;
+        final Calendar myCalendar = Calendar.getInstance();
 
+        final TextView dateOfBirth= (TextView) findViewById(R.id.Birthday);
+        dateOfBirth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        ScrollingActivity.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mDateSetListener,
+                        year,month,day);
+//                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+//                Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
+
+                String date = month + "/" + day + "/" + year;
+                dateOfBirth.setText(date);
+            }
+        };
 
 
         //Assign a listener to your button
@@ -45,11 +86,13 @@ public class ScrollingActivity extends AppCompatActivity {
                 otherAllergies = otherAllergiesInput.getText().toString() ;
                 currentMedicalCondition = currentMedicalConditionInput.getText().toString() ;
                 currentMedication = currentMedicationInput.getText().toString() ;
+                birthDate = dateOfBirth.getText().toString();
                 System.out.println(name);
                 System.out.println(bloodType);
 
                 Intent intent = new Intent(ScrollingActivity.this, Secondary.class);
                 intent.putExtra("EXTRA_NAME", name);
+                intent.putExtra("DATE_OF_BIRTH",birthDate);
                 startActivity(intent);
             }
         });

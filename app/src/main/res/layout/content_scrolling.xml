@@ -38,21 +38,31 @@
             android:textAllCaps="false"
             android:textColor="@color/colorPrimary"
             android:textSize="12sp" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="date"
-            android:onClick="showDatePickerDialog" />
-
-        <EditText
-            android:id="@+id/your_birthday"
+        <TextView
+            android:id="@+id/Birthday"
+            android:clickable="true"
             android:layout_width="fill_parent"
-            android:layout_height="38dp"
-            android:layout_marginBottom="20dp"
-            android:inputType="textEmailAddress"
-            android:singleLine="true"
-            android:textSize="14sp" />
+            android:layout_height="wrap_content"
+            android:paddingLeft="3dp"
+            android:text="Birthday"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp" />
+
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="date"-->
+            <!--android:onClick="showDatePickerDialog" />-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/your_birthday"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="38dp"-->
+            <!--android:layout_marginBottom="20dp"-->
+            <!--android:inputType="textEmailAddress"-->
+            <!--android:singleLine="true"-->
+            <!--android:textSize="14sp" />-->
 
         <TextView
             android:layout_width="fill_parent"
