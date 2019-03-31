@@ -24,9 +24,9 @@ public class ScrollingActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
 
-    EditText nameInput, bloodTypeInput, drugAllergiesInput, otherAllergiesInput, currentMedicalConditionInput, currentMedicationInput;
+    EditText nameInput, sexInput, bloodTypeInput, drugAllergiesInput, otherAllergiesInput, currentMedicalConditionInput, currentMedicationInput;
 
-    String name, bloodType, drugAllergies, otherAllergies, currentMedicalCondition, currentMedication, birthDate;
+    String name, sex, bloodType, drugAllergies, otherAllergies, currentMedicalCondition, currentMedication, birthDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +35,7 @@ public class ScrollingActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         imageButton = (Button)findViewById(R.id.post_message);
         nameInput = (EditText) findViewById(R.id.your_name);
+        sexInput = (EditText) findViewById(R.id.your_sex);
         bloodTypeInput = (EditText) findViewById(R.id.your_blood_type);
         drugAllergiesInput = (EditText) findViewById(R.id.your_drug_allergies);
         otherAllergiesInput = (EditText) findViewById(R.id.your_food_allergies);
@@ -81,6 +82,7 @@ public class ScrollingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Start your second activity
                 name = nameInput.getText().toString() ;
+                sex = sexInput.getText().toString();
                 bloodType = bloodTypeInput.getText().toString() ;
                 drugAllergies = drugAllergiesInput.getText().toString() ;
                 otherAllergies = otherAllergiesInput.getText().toString() ;
@@ -92,7 +94,14 @@ public class ScrollingActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(ScrollingActivity.this, Secondary.class);
                 intent.putExtra("EXTRA_NAME", name);
+                intent.putExtra("SEX", sex);
                 intent.putExtra("DATE_OF_BIRTH",birthDate);
+                intent.putExtra("BLOOD_TYPE",bloodType);
+                intent.putExtra("DRUG_ALLERGIES",drugAllergies);
+                intent.putExtra("OTHER_ALLERGIES",otherAllergies);
+                intent.putExtra("CURRENT_MEDICAL_CONDITIONS",currentMedicalCondition);
+                intent.putExtra("CURRENT_MEDICATION",currentMedication);
+
                 startActivity(intent);
             }
         });
