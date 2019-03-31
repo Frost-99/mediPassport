@@ -3,19 +3,19 @@
     package="com.example.medipassport">
 
     <application
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="false">
         <activity
-            android:name=".Secondary"
+            android:name=".Edit"
             android:label="@string/title_activity_secondary"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".ScrollingActivity"
+            android:name=".Home"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -24,9 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <meta-data android:name="com.google.android.gms.version"
-                    android:value="@integer/google_play_services_version" />
-
     </application>
 
 </manifest>

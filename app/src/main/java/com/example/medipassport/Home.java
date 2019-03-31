@@ -19,16 +19,16 @@ import android.content.Intent;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class ScrollingActivity extends AppCompatActivity {
+public class Home extends AppCompatActivity {
     private Button imageButton;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
-
 
     EditText nameInput, bloodTypeInput, drugAllergiesInput, otherAllergiesInput, currentMedicalConditionInput, currentMedicationInput;
 
     String name, bloodType, drugAllergies, otherAllergies, currentMedicalCondition, currentMedication, birthDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("Edit");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -54,7 +54,7 @@ public class ScrollingActivity extends AppCompatActivity {
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dialog = new DatePickerDialog(
-                        ScrollingActivity.this,
+                        Home.this,
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener,
                         year,month,day);
@@ -90,7 +90,7 @@ public class ScrollingActivity extends AppCompatActivity {
                 System.out.println(name);
                 System.out.println(bloodType);
 
-                Intent intent = new Intent(ScrollingActivity.this, Secondary.class);
+                Intent intent = new Intent(Home.this, Edit.class);
                 intent.putExtra("EXTRA_NAME", name);
                 intent.putExtra("DATE_OF_BIRTH",birthDate);
                 startActivity(intent);

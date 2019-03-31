@@ -11,13 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class Secondary extends AppCompatActivity {
+public class Edit extends AppCompatActivity {
 
 //    String name = getIntent().getStringExtra("EXTRA_NAME");
 private FloatingActionButton imageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("Your Profile");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secondary);
         Toolbar toolbar = findViewById(R.id.toolbar);
