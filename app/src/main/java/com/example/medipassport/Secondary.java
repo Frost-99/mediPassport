@@ -10,6 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.io.InputStream;;
@@ -17,7 +21,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
+import java.util.HashMap;
+import java.util.Map;
 
 
 import javax.xml.datatype.Duration;
@@ -39,7 +44,7 @@ private FloatingActionButton imageButton;
             connection.setRequestProperty("Content-Type", "application/json");
             //TODO may be prod or preprod api key
 
-            connection.setRequestProperty("Authorization", "Bearer " + "ya29.c.ElrdBgg0FqGykPg31qLhPbLuiVHb9bWM4t0CjXVgREMQlG2t5ueML6YCfoHOmOaba5UJs7iXHubpJhU6bZHlFu03LrAYGZnNjf4slNkzU8hQyGgbYm77-Zl5mvA");
+            connection.setRequestProperty("Authorization", "Bearer " + "ya29.c.ElrdBnmRNpwKyYu34qTmdZ9W9Hns2A8Cc8rmGwmCR5V9oREXewQMXeeC7cR-yClhMr2ndn4S_3kzlV0ReL1O-Z9IBTtP5VGOO3-GWMDkoDLKZYaXMxKl2mXyTtQ");
 //            if (apikey.equals(Constants.APIKEY_PROD)){
 //                connection.setRequestProperty("Authorization", Constants.APIKEY_PROD);
 //            }
@@ -117,15 +122,58 @@ private FloatingActionButton imageButton;
 
 //                Intent intent = new Intent(Secondary.this, ScrollingActivity.class);
 //                intent.putExtra("SAVED_NAME", "");
-
+                final Map<String, String> result = new HashMap<String, String>();
                 Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try{
+
                             String translatedString = null;
-                            translatedString = executePost("https://translation.googleapis.com/language/translate/v2", "{\"q\": \"measles\",\"source\": \"en\", \"target\": \"zh\",\"format\": \"text\" }");
+                            String front = "{\"q\": \"", back = "\",\"source\": \"en\", \"target\": \"zh\",\"format\": \"text\" }";
+
+                            TextView tempView = (TextView) findViewById(R.id.sex);
+                            String tempstring = tempView.getText().toString();
+                            String json = front + tempstring + back;
+                            translatedString = null;
+                            translatedString = executePost("https://translation.googleapis.com/language/translate/v2", json);
                             while (translatedString == null){}
+                            int tempint = translatedString.indexOf("translateText")+17;
+                            String target = translatedString.substring(tempint, tempint + translatedString.substring(tempint).indexOf("\""));
                             System.out.println(translatedString);
+                            result.put(Integer.toString(R.id.sex),target);
+
+
+                            tempView = (TextView) findViewById(R.id.drug_allergies);
+                            tempstring = tempView.getText().toString();
+                            json = front + tempstring + back;
+                            translatedString = null;
+                            translatedString = executePost("https://translation.googleapis.com/language/translate/v2", json);
+                            while (translatedString == null){}
+                            tempint = translatedString.indexOf("translateText")+17;
+                            target = translatedString.substring(tempint, tempint + translatedString.substring(tempint).indexOf("\""));
+                            result.put(Integer.toString(R.id.drug_allergies), target);
+
+                            tempView = (TextView) findViewById(R.id.food_allergies);
+                            tempstring = tempView.getText().toString();
+                            json = front + tempstring + back;
+                            translatedString = null;
+                            translatedString = executePost("https://translation.googleapis.com/language/translate/v2", json);
+                            while (translatedString == null){}
+                            tempint = translatedString.indexOf("translateText")+17;
+                            target = translatedString.substring(tempint, tempint + translatedString.substring(tempint).indexOf("\""));
+                            result.put(Integer.toString(R.id.food_allergies), target);
+
+                            tempView = (TextView) findViewById(R.id.medical_conditions);
+                            tempstring = tempView.getText().toString();
+                            json = front + tempstring + back;
+                            translatedString = null;
+                            translatedString = executePost("https://translation.googleapis.com/language/translate/v2", json);
+                            while (translatedString == null){}
+                            tempint = translatedString.indexOf("translateText")+17;
+                            target = translatedString.substring(tempint, tempint + translatedString.substring(tempint).indexOf("\""));
+                            result.put(Integer.toString(R.id.medical_conditions), target);
+
+
                         } catch (Exception e)
                         {
                             System.out.println(e);
@@ -133,7 +181,11 @@ private FloatingActionButton imageButton;
                     }
                 });
                 thread.start();
-
+                for (String key : result.keySet())
+                {
+                    TextView tempView = (TextView) findViewById(Integer.parseInt(key));
+                    tempView.setText(result.get(key));
+                }
             }});
 
         imageButton = (FloatingActionButton) findViewById(R.id.fab);
