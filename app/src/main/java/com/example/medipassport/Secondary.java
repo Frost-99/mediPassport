@@ -22,13 +22,38 @@ private FloatingActionButton imageButton;
         setContentView(R.layout.activity_secondary);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         String name = getIntent().getStringExtra("EXTRA_NAME");
-        System.out.print(name);
         TextView savedName = (TextView) findViewById(R.id.name);
         savedName.setText(name);
+
         String dateOfBirth =  getIntent().getStringExtra("DATE_OF_BIRTH");
         TextView birthDate = (TextView) findViewById(R.id.birthday) ;
         birthDate.setText(dateOfBirth);
+
+        String sex =  getIntent().getStringExtra("SEX");
+        TextView gender = (TextView) findViewById(R.id.sex) ;
+        gender.setText(sex);
+
+        String bloodType =  getIntent().getStringExtra("BLOOD_TYPE");
+        TextView typeOfBlood = (TextView) findViewById(R.id.blood_type) ;
+        typeOfBlood.setText(bloodType);
+
+        String drugAllergies =  getIntent().getStringExtra("DRUG_ALLERGIES");
+        TextView drug = (TextView) findViewById(R.id.drug_allergies) ;
+        drug.setText(drugAllergies);
+
+        String otherAllergies =  getIntent().getStringExtra("OTHER_ALLERGIES");
+        TextView others = (TextView) findViewById(R.id.food_allergies) ;
+        others.setText(otherAllergies);
+
+        String medicalConditions =  getIntent().getStringExtra("CURRENT_MEDICAL_CONDITIONS");
+        TextView conditions = (TextView) findViewById(R.id.medical_conditions) ;
+        conditions.setText(medicalConditions);
+
+        String medications =  getIntent().getStringExtra("CURRENT_MEDICATION");
+        TextView currentMedications = (TextView) findViewById(R.id.medications) ;
+        currentMedications.setText(medications);
 //        FloatingActionButton fab = findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
