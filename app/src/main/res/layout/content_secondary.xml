@@ -7,6 +7,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Secondary"
     tools:showIn="@layout/activity_secondary">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,13 +40,6 @@
             android:textAllCaps="false"
             android:textColor="@color/colorPrimary"
             android:textSize="12sp" />
-
-        <Button
-            android:id="@+id/test"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="date"
-            android:onClick="showDatePickerDialog" />
 
         <TextView
             android:id="@+id/birthday"
